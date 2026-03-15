@@ -171,22 +171,6 @@
     const createWishItem = (wish) => {
       const li = document.createElement('li');
       li.className = 'wish-item';
-      li.innerHTML = `
-        <img src="${wish.image}" alt="${wish.name}">
-        <span class="wish-name">${wish.name}</span>
-        <div>
-          <button class="claim-btn" type="button">I give it as a present</button>
-          <button class="cancel-btn" type="button">Cancel my choice</button>
-        </div>
-      `;
-
-      li.querySelector('.claim-btn').addEventListener('click', () => {
-        li.classList.add('claimed');
-      });
-
-      li.querySelector('.cancel-btn').addEventListener('click', () => {
-        li.classList.remove('claimed');
-      });
 
       return li;
     };
