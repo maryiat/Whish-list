@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Wireless Headphones",
+    "image": "https://picsum.photos/seed/headphones/180/180",
+    "claimed": false
+  },
+  {
+    "id": 2,
+    "name": "Kindle Paperwhite",
+    "image": "https://picsum.photos/seed/kindle/180/180",
+    "claimed": false
+  },
+  {
+    "id": 3,
+    "name": "Yoga Mat Set",
+    "image": "https://picsum.photos/seed/yoga/180/180",
+    "claimed": false
+  },
+  {
+    "id": 4,
+    "name": "Coffee Gift Box",
+    "image": "https://picsum.photos/seed/coffee/180/180",
+    "claimed": false
+  },
+  {
+    "id": 5,
+    "name": "Aromatherapy Diffuser",
+    "image": "https://picsum.photos/seed/diffuser/180/180",
+    "claimed": false
+  },
+  {
+    "id": 6,
+    "name": "Sketchbook Collection",
+    "image": "https://picsum.photos/seed/sketchbook/180/180",
+    "claimed": false
+  },
+  {
+    "id": 7,
+    "name": "Board Game Night Pack",
+    "image": "https://picsum.photos/seed/boardgame/180/180",
+    "claimed": false
+  },
+  {
+    "id": 8,
+    "name": "Travel Backpack",
+    "image": "https://picsum.photos/seed/backpack/180/180",
+    "claimed": false
+  },
+  {
+    "id": 9,
+    "name": "Smart Water Bottle",
+    "image": "https://picsum.photos/seed/waterbottle/180/180",
+    "claimed": false
+  },
+  {
+    "id": 10,
+    "name": "Mini Projector",
+    "image": "https://picsum.photos/seed/projector/180/180",
+    "claimed": false
+  },
+  {
+    "id": 11,
+    "name": "Cooking Class Voucher",
+    "image": "https://picsum.photos/seed/cooking/180/180",
+    "claimed": false
+  },
+  {
+    "id": 12,
+    "name": "Polaroid Camera",
+    "image": "https://picsum.photos/seed/polaroid/180/180",
+    "claimed": false
+  },
+  {
+    "id": 13,
+    "name": "Cozy Blanket",
+    "image": "https://picsum.photos/seed/blanket/180/180",
+    "claimed": false
+  },
+  {
+    "id": 14,
+    "name": "Plant Starter Kit",
+    "image": "https://picsum.photos/seed/plants/180/180",
+    "claimed": false
+  },
+  {
+    "id": 15,
+    "name": "Perfume Set",
+    "image": "https://picsum.photos/seed/perfume/180/180",
+    "claimed": false
+  },
+  {
+    "id": 16,
+    "name": "Spa Day Certificate",
+    "image": "https://picsum.photos/seed/spa/180/180",
+    "claimed": false
+  },
+  {
+    "id": 17,
+    "name": "Bluetooth Speaker",
+    "image": "https://picsum.photos/seed/speaker/180/180",
+    "claimed": false
+  },
+  {
+    "id": 18,
+    "name": "Custom Jewelry",
+    "image": "https://picsum.photos/seed/jewelry/180/180",
+    "claimed": false
+  },
+  {
+    "id": 19,
+    "name": "Weekend Getaway Bag",
+    "image": "https://picsum.photos/seed/getaway/180/180",
+    "claimed": false
+  },
+  {
+    "id": 20,
+    "name": "Art Museum Tickets",
+    "image": "https://picsum.photos/seed/museum/180/180",
+    "claimed": false
+  }
+]
