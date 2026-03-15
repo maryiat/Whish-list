@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alina's Birthday Wish List</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg,
+          #ff0000 0%,
+          #ff7f00 16%,
+          #ffff00 32%,
+          #00ff00 48%,
+          #0000ff 64%,
+          #4b0082 82%,
+          #8f00ff 100%);
+      --text-color: #1e1e1e;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --claimed-bg: #d9d9d9;
+      --button-green: #1b9e3f;
+      --button-red: #d62828;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text-color);
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      padding: 2rem 1rem 3rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 { margin-top: 0; text-align: center; font-size: 2rem; }
+
+    .intro {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .status {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    .wish-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .wish-item {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      border-radius: 12px;
+      background: #ffffff;
+      transition: background 0.2s ease, opacity 0.2s ease;
+    }
+
+    .wish-item img {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .wish-name { font-weight: bold; font-size: 1rem; }
+
+    .wish-item button {
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 700;
+      padding: 0.55rem 0.9rem;
+      cursor: pointer;
+      min-width: 180px;
+    }
+
+    .claim-btn { background: var(--button-green); }
+
+    .cancel-btn {
+      background: var(--button-red);
+      display: none;
+    }
+
+    .wish-item.claimed {
+      background: var(--claimed-bg);
+      opacity: 0.85;
+    }
+
+    .wish-item.claimed .claim-btn { display: none; }
+    .wish-item.claimed .cancel-btn { display: inline-block; }
+
+    @media (max-width: 700px) {
+      .wish-item { grid-template-columns: 70px 1fr; }
+      .wish-item img { width: 70px; height: 70px; }
+      .wish-item button {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Alina's Birthday Wish List</h1>
+    <p class="intro">This is a whish list for Alina's birthday.</p>
+    <p class="status" id="status">Loading shared wish list...</p>
+    <ul class="wish-list" id="wishList"></ul>
+  </main>
+
+  <script>
+    const wishList = document.getElementById('wishList');
+    const status = document.getElementById('status');
+
+    const setStatus = (message) => {
+      status.textContent = message;
+    };
+
+    const updateWishState = async (wishId, claimed) => {
+      const response = await fetch('/api/wishes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: wishId, claimed })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update item state.');
+      }
+    };
+
+    const createWishItem = (wish) => {
+      const li = document.createElement('li');
+      li.className = `wish-item${wish.claimed ? ' claimed' : ''}`;
+      li.innerHTML = `
+        <img src="${wish.image}" alt="${wish.name}">
+        <span class="wish-name">${wish.name}</span>
+        <div>
+          <button class="claim-btn" type="button">I give it as a present</button>
+          <button class="cancel-btn" type="button">Cancel my choice</button>
+        </div>
+      `;
+
+      const claimBtn = li.querySelector('.claim-btn');
+      const cancelBtn = li.querySelector('.cancel-btn');
+
+      claimBtn.addEventListener('click', async () => {
+        try {
+          await updateWishState(wish.id, true);
+          li.classList.add('claimed');
+          setStatus('Updated for everyone.');
+        } catch {
+          setStatus('Could not save your choice. Please retry.');
+        }
+      });
+
+      cancelBtn.addEventListener('click', async () => {
+        try {
+          await updateWishState(wish.id, false);
+          li.classList.remove('claimed');
+          setStatus('Updated for everyone.');
+        } catch {
+          setStatus('Could not save your choice. Please retry.');
+        }
+      });
+
+      return li;
+    };
+
+    const renderWishes = (wishes) => {
+      wishList.textContent = '';
+      wishes.forEach((wish) => wishList.appendChild(createWishItem(wish)));
+    };
+
+    const loadWishes = async () => {
+      const response = await fetch('/api/wishes');
+      if (!response.ok) {
+        throw new Error('Could not load wishes');
+      }
+      const data = await response.json();
+      renderWishes(data.wishes);
+      setStatus('Shared list is live. Changes sync for all users.');
+    };
+
+    const refreshFromServer = async () => {
+      try {
+        const response = await fetch('/api/wishes');
+        if (!response.ok) return;
+        const data = await response.json();
+        renderWishes(data.wishes);
+      } catch {
+        // keep current view
+      }
+    };
+
+    loadWishes().catch(() => {
+      setStatus('Could not load shared list. Start server.py and refresh.');
+    });
+
+    setInterval(refreshFromServer, 5000);
+  </script>
+</body>
+</html>
