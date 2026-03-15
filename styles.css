@@ -77,25 +77,15 @@ body {
   min-height: 2.6rem;
 }
 
-.picture-slot {
+.item-image {
   width: 100%;
   max-width: 300px;
   height: 200px;
   border-radius: 12px;
-  border: 2px dashed #c589ff;
-  background: repeating-linear-gradient(
-    -45deg,
-    #fff 0,
-    #fff 10px,
-    #fdf1ff 10px,
-    #fdf1ff 20px
-  );
-  display: grid;
-  place-items: center;
-  text-align: center;
-  color: #8f5db7;
-  font-weight: 700;
+  border: 2px solid #c589ff;
+  object-fit: cover;
   align-self: center;
+  background: #fdf1ff;
 }
 
 .card a {
