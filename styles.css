@@ -102,3 +102,24 @@ body {
 .card a:focus-visible {
   filter: brightness(0.95);
 }
+
+.message-form {
+  margin: 0;
+}
+
+.message-button {
+  width: 100%;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  background: linear-gradient(90deg, #402354, #6b3fa0);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.message-button:hover,
+.message-button:focus-visible {
+  filter: brightness(1.08);
+}
