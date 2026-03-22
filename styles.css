@@ -40,10 +40,29 @@ body {
 }
 
 .welcome p {
-  margin: 0;
   line-height: 1.6;
   font-size: 1.05rem;
   text-align: center;
+}
+
+.welcome-intro {
+  margin: 0;
+}
+
+.welcome-intro + .welcome-intro {
+  margin-top: 0.8rem;
+}
+
+.welcome-steps {
+  max-width: 760px;
+  margin: 1rem auto 0;
+  padding-left: 1.5rem;
+  line-height: 1.7;
+  font-size: 1.02rem;
+}
+
+.welcome-steps li + li {
+  margin-top: 0.65rem;
 }
 
 .wishlist {
